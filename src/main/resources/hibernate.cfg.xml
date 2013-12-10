@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <mapping class="com.generic.entity.Booking"/>
+        <mapping class="com.generic.entity.Category"/>
+        <mapping class="com.generic.entity.Employee"/>
+        <mapping class="com.generic.entity.EmployeeProduct"/>
+        <mapping class="com.generic.entity.EmployeeRoster"/>
+        <mapping class="com.generic.entity.Organization"/>
+        <mapping class="com.generic.entity.Product"/>
+        <mapping class="com.generic.entity.ProductImage"/>
+        <mapping class="com.generic.entity.ProductRate"/>
+        <mapping class="com.generic.entity.Rate"/>
+        <mapping class="com.generic.entity.Roster"/>
+        <mapping class="com.generic.entity.User"/>
+    </session-factory>
+
+</hibernate-configuration>

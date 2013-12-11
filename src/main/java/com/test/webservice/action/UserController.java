@@ -110,7 +110,7 @@ public class UserController {
             User user = userService.detailsOfUser(userName);
             if (user != null) {
                 if (user.getPassword().equals(password)) {
-                    session.setAttribute("USER",userName);
+                    session.setAttribute("USER", userName);
                     responseObj.put("status", "success");
                     responseObj.put("message", "Login success");
 
@@ -130,6 +130,19 @@ public class UserController {
             responseObj.put("status", "fail");
             responseObj.put("message", ex.getMessage());
         }
+        String json = new Gson().toJson(responseObj);
+        return json;
+    }
+
+    @ResponseBody
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Map<String, String> responseObj = new HashMap<String, String>();
+        HttpSession session = request.getSession();
+        session.removeAttribute("USER");
+        responseObj.put("status", "success");
+        responseObj.put("message", "Logout successful");
+
         String json = new Gson().toJson(responseObj);
         return json;
     }

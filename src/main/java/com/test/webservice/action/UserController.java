@@ -96,4 +96,34 @@ public class UserController {
         return json;
     }
 
+    @ResponseBody
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Map<String, String> responseObj = new HashMap<String, String>();
+        try {
+            String userName = request.getParameter("emailID");
+            String password = request.getParameter("password");
+
+            User user = userService.detailsOfUser(userName);
+            if (user != null) {
+                if (user.getPassword().equals(password)) {
+                    responseObj.put("status", "success");
+                    responseObj.put("message", "Login success");
+                } else {
+                    responseObj.put("status", "fail");
+                    responseObj.put("message", "Login incorrect, wrong password");
+                }
+            } else {
+                responseObj.put("status", "fail");
+                responseObj.put("message", "Login incorrect, wrong emailID");
+            }
+
+        } catch (Exception ex) {
+            responseObj.put("status", "fail");
+            responseObj.put("message", ex.getMessage());
+        }
+        String json = new Gson().toJson(responseObj);
+        return json;
+    }
+
 }

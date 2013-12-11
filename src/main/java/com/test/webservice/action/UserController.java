@@ -4,12 +4,14 @@ import com.generic.entity.User;
 import com.generic.service.UserService;
 import com.google.gson.Gson;
 import com.test.webservice.util.HibernateUtil;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,6 +102,7 @@ public class UserController {
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, String> responseObj = new HashMap<String, String>();
+        HttpSession session = request.getSession();
         try {
             String userName = request.getParameter("emailID");
             String password = request.getParameter("password");
@@ -107,18 +110,23 @@ public class UserController {
             User user = userService.detailsOfUser(userName);
             if (user != null) {
                 if (user.getPassword().equals(password)) {
+                    session.setAttribute("USER",userName);
                     responseObj.put("status", "success");
                     responseObj.put("message", "Login success");
+
                 } else {
+                    session.removeAttribute("USER");
                     responseObj.put("status", "fail");
                     responseObj.put("message", "Login incorrect, wrong password");
                 }
             } else {
+                session.removeAttribute("USER");
                 responseObj.put("status", "fail");
                 responseObj.put("message", "Login incorrect, wrong emailID");
             }
 
         } catch (Exception ex) {
+            session.removeAttribute("USER");
             responseObj.put("status", "fail");
             responseObj.put("message", ex.getMessage());
         }

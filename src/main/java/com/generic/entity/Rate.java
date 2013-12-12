@@ -31,6 +31,11 @@ public class Rate {
         this.status = status;
         this.price = price;
     }
+    public Rate(String rateName, String rateDescription, float price) {
+        this.rateName = rateName;
+        this.rateDescription = rateDescription;
+        this.price = price;
+    }
 
     public int getRateID() {
         return rateID;

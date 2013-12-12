@@ -1,5 +1,6 @@
 package com.test.webservice.action;
 
+import com.generic.entity.Product;
 import com.generic.entity.ProductImage;
 import com.generic.service.ProductImageService;
 import com.generic.service.ProductService;
@@ -27,6 +28,9 @@ public class ProductImageController {
     @Autowired
     private ProductImageService productImageService;
 
+    @Autowired
+    private ProductService productService;
+
     @ResponseBody
     @RequestMapping(value = "/getAllImagesOfAProduct", method = RequestMethod.GET)
     public String getAllImagesOfAProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -50,6 +54,11 @@ public class ProductImageController {
     public String saveOrUpdate(@ModelAttribute("productImage") ProductImage productImage, HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, String> responseObj = new HashMap<String, String>();
         try {
+            int productID = Integer.parseInt(request.getParameter("productID"));
+            if(productID > 0){
+                Product product = productService.detailsOfService(productID);
+                productImage.setProduct(product);
+            }
             productImageService.saveOrUpdate(productImage);
             responseObj.put("status", "success");
             responseObj.put("message", "Product-image save or update successfully");

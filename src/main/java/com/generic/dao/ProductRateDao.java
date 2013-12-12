@@ -10,7 +10,7 @@ import java.util.List;
  * Date: 9/22/13
  */
 public interface ProductRateDao {
-    public List<Rate> getAllRatesOfAProduct(int productID);
+    public List<ProductRate> getAllRatesOfAProduct(int productID);
 
     public void saveOrUpdate(ProductRate productRate);
 

@@ -26,7 +26,7 @@ public class ProductRateDaoImpl implements ProductRateDao {
     }
 
     @Override
-    public List<Rate> getAllRatesOfAProduct(int productID) {
+    public List<ProductRate> getAllRatesOfAProduct(int productID) {
         return sessionFactory.getCurrentSession().createQuery("from ProductRate where productID = :productID").setInteger("productID", productID).list();
     }
 

@@ -21,7 +21,7 @@ public class ProductRateServiceImpl implements ProductRateService {
     }
 
     @Override
-    public List<Rate> getAllRatesOfAProduct(int productID) {
+    public List<ProductRate> getAllRatesOfAProduct(int productID) {
         return productRateDao.getAllRatesOfAProduct(productID);
     }
 

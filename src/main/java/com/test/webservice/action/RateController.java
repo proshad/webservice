@@ -134,14 +134,15 @@ public class RateController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/allRates", method = RequestMethod.POST)
-    public String getAllRates(@ModelAttribute("productRate") ProductRate productRate, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/allRatesOfAProduct", method = RequestMethod.GET)
+    public String getAllRatesOfAProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String json = "";
         int productID = Integer.parseInt(request.getParameter("productID"));
         if (productID > 0) {
-            List<Rate> rates = productRateService.getAllRatesOfAProduct(productID);
+            List<ProductRate> productRates = productRateService.getAllRatesOfAProduct(productID);
             List allRates = new ArrayList();
-            for (Rate rate : rates) {
+            for (ProductRate pRate : productRates) {
+                Rate rate = rateService.detailsOfRate(pRate.getRate().getRateID());
                 Map rateMap = new HashMap();
                 rate = HibernateUtil.unproxy(rate);
                 rateMap.put("rateId", rate.getRateID());
@@ -157,8 +158,8 @@ public class RateController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/removeRateProduct", method = RequestMethod.POST)
-    public String removeRateProduct(@ModelAttribute("productRate") ProductRate productRate, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/removeRateProduct")
+    public String removeRateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, String> responseObj = new HashMap<String, String>();
         try {
             int productID = Integer.parseInt(request.getParameter("productID"));

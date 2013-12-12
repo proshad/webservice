@@ -4,6 +4,7 @@ import com.generic.entity.User;
 import com.generic.service.UserService;
 import com.google.gson.Gson;
 import com.test.webservice.util.HibernateUtil;
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,20 +49,28 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getDetails/{id}", method = RequestMethod.GET)
-    public String getUserDetails(@PathVariable("emailId") String emailId) {
+    @RequestMapping(value = "/getDetails", method = RequestMethod.GET)
+    public String getUserDetails(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String emailId = request.getParameter("emailID");
+        if (StringUtils.isNotEmpty(emailId)) {
+            User user = userService.detailsOfUser(emailId);
+            Map userMap = new HashMap();
+            user = HibernateUtil.unproxy(user);
+            userMap.put("email", user.getEmailID());
+            userMap.put("password", user.getPassword().trim());
+            userMap.put("firstName", user.getFirstName().trim());
+            userMap.put("lastName", user.getLastName().trim());
+            userMap.put("profileImageUrl", user.getImageUrl());
 
-        User user = userService.detailsOfUser(emailId);
-        Map userMap = new HashMap();
-        user = HibernateUtil.unproxy(user);
-        userMap.put("email", user.getEmailID());
-        userMap.put("password", user.getPassword().trim());
-        userMap.put("firstName", user.getFirstName().trim());
-        userMap.put("lastName", user.getLastName().trim());
-        userMap.put("profileImageUrl", user.getImageUrl());
+            String json = new Gson().toJson(userMap);
+            return json;
+        } else {
+            Map<String, String> responseObj = new HashMap<String, String>();
+            responseObj.put("status", "fail");
+            responseObj.put("message", "No such emailID");
+            return new Gson().toJson(responseObj);
+        }
 
-        String json = new Gson().toJson(userMap);
-        return json;
     }
 
     @ResponseBody
@@ -82,14 +91,20 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping("/delete/{id}")
-    public String delete(@PathVariable("emailId") String emailId) {
+    @RequestMapping("/delete")
+    public String delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, String> responseObj = new HashMap<String, String>();
         try {
-            userService.removeUser(emailId);
+            String emailId = request.getParameter("emailID");
+            if (StringUtils.isNotEmpty(emailId)) {
+                userService.removeUser(emailId);
 
-            responseObj.put("status", "success");
-            responseObj.put("message", "User remove successfully");
+                responseObj.put("status", "success");
+                responseObj.put("message", "User remove successfully");
+            } else {
+                responseObj.put("status", "fail");
+                responseObj.put("message", "No such emailID found");
+            }
         } catch (Exception ex) {
             responseObj.put("status", "fail");
             responseObj.put("message", ex.getMessage());
@@ -99,7 +114,7 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, String> responseObj = new HashMap<String, String>();
         HttpSession session = request.getSession();

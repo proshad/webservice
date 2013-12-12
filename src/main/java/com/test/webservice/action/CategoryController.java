@@ -58,21 +58,24 @@ public class CategoryController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getAllProducts/{id}", method = RequestMethod.GET)
-    public String getAllProducts(@PathVariable("id") int catId) {
+    @RequestMapping(value = "/allProductsOfACategory", method = RequestMethod.GET)
+    public String getAllProductsOfACategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List allProducts = new ArrayList();
-        List<Product> products = productService.listOfProductsOfCategory(catId);
-        for (Product product : products) {
-            Map productMap = new HashMap();
-            product = HibernateUtil.unproxy(product);
-            productMap.put("productId", product.getProductID());
-            productMap.put("name", product.getProductName());
-            productMap.put("description", product.getProductDescription());
-            productMap.put("notes", product.getProductNote());
-            productMap.put("noOfTimeSlot", product.getNoOfTimeSlot());
-            productMap.put("status", product.isStatus());
+        int categoryID = Integer.parseInt(request.getParameter("categoryID"));
+        if (categoryID > 0) {
+            List<Product> products = productService.listOfProductsOfCategory(categoryID);
+            for (Product product : products) {
+                Map productMap = new HashMap();
+                product = HibernateUtil.unproxy(product);
+                productMap.put("productId", product.getProductID());
+                productMap.put("name", product.getProductName());
+                productMap.put("description", product.getProductDescription());
+                productMap.put("notes", product.getProductNote());
+                productMap.put("noOfTimeSlot", product.getNoOfTimeSlot());
+                productMap.put("status", product.isStatus());
 
-            allProducts.add(productMap);
+                allProducts.add(productMap);
+            }
         }
         String json = new Gson().toJson(allProducts);
         return json;

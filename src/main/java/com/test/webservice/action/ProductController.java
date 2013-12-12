@@ -80,8 +80,8 @@ public class ProductController {
         try {
             int categoryID = Integer.parseInt(request.getParameter("categoryID"));
 
-            Category category = categoryService.detailsOfCategory(categoryID);
-            if(category != null){
+            if(categoryID >0){
+                Category category = categoryService.detailsOfCategory(categoryID);
                 product.setCategory(category);
             }
 

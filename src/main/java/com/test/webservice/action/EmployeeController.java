@@ -103,6 +103,9 @@ public class EmployeeController {
             employeeMap.put("involveService", allProducts);
         }
 
+        // might need to show roster data of employee
+        // might need to show booking involve of employee
+
         String json = new Gson().toJson(employeeMap);
         return json;
     }

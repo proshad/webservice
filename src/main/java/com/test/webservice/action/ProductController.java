@@ -43,8 +43,8 @@ public class ProductController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/getAllProducts", method = RequestMethod.GET)
-    public String getAllCategory() {
+    @RequestMapping(value = "/getAllServices", method = RequestMethod.GET)
+    public String getAllServices() {
         List allProducts = new ArrayList();
         List<Product> products = productService.listOfProducts();
         for (Product product : products) {

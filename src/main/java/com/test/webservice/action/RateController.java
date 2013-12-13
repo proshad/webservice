@@ -32,7 +32,7 @@ public class RateController {
     @Autowired
     private ProductRateService productRateService;
 
-@Autowired
+    @Autowired
     private ProductService productService;
 
 
@@ -114,11 +114,11 @@ public class RateController {
             int rateID = Integer.parseInt(request.getParameter("rateID"));
             int productID = Integer.parseInt(request.getParameter("productID"));
             Rate rate = rateService.detailsOfRate(rateID);
-            if(rate !=null){
+            if (rate != null) {
                 productRate.setRate(rate);
             }
             Product product = productService.detailsOfService(productID);
-            if(product!=null){
+            if (product != null) {
                 productRate.setProduct(product);
             }
             productRateService.saveOrUpdate(productRate);

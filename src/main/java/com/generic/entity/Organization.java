@@ -26,13 +26,12 @@ public class Organization {
     private String location;
     @Column(length = 500)
     private String tradeLicense;
-    @Column(length = 100)
-    private String timeSlotDuration;
+    private int timeSlotDuration;
 
     public Organization() {
     }
 
-    public Organization(String name, String timeSlotDuration, String tradeLicense, String location, String contactDetails, String description, String tradingHour) {
+    public Organization(String name, int timeSlotDuration, String tradeLicense, String location, String contactDetails, String description, String tradingHour) {
         this.name = name;
         this.timeSlotDuration = timeSlotDuration;
         this.tradeLicense = tradeLicense;
@@ -98,11 +97,11 @@ public class Organization {
         this.tradeLicense = tradeLicense;
     }
 
-    public String getTimeSlotDuration() {
+    public int getTimeSlotDuration() {
         return timeSlotDuration;
     }
 
-    public void setTimeSlotDuration(String timeSlotDuration) {
+    public void setTimeSlotDuration(int timeSlotDuration) {
         this.timeSlotDuration = timeSlotDuration;
     }
 }

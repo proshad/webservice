@@ -1,9 +1,7 @@
 package com.test.webservice.action;
 
-import com.generic.entity.Category;
-import com.generic.entity.Product;
-import com.generic.service.CategoryService;
-import com.generic.service.ProductService;
+import com.generic.entity.*;
+import com.generic.service.*;
 import com.google.gson.Gson;
 import com.test.webservice.util.HibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +21,26 @@ import java.util.Map;
  * Date: 9/14/13
  */
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/service")
 public class ProductController {
     @Autowired
     private ProductService productService;
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private OrganizationService organizationService;
+
+    @Autowired
+    private ProductRateService productRateService;
+
+    @Autowired
+    private RateService rateService;
+
+    @Autowired
+    private ProductImageService productImageService;
+
 
     @ResponseBody
     @RequestMapping(value = "/getAllProducts", method = RequestMethod.GET)
@@ -41,10 +52,10 @@ public class ProductController {
             product = HibernateUtil.unproxy(product);
             productMap.put("productId", product.getProductID());
             productMap.put("name", product.getProductName());
-            productMap.put("description", product.getProductDescription());
-            productMap.put("notes", product.getProductNote());
+//            productMap.put("description", product.getProductDescription());
+//            productMap.put("notes", product.getProductNote());
             productMap.put("noOfTimeSlot", product.getNoOfTimeSlot());
-            productMap.put("status", product.isStatus());
+//            productMap.put("status", product.isStatus());
             productMap.put("categoryId", product.getCategory().getCategoryID());
 
 
@@ -55,21 +66,67 @@ public class ProductController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getDetails/{id}", method = RequestMethod.GET)
-    public String getProductDetails(@PathVariable("id") int productId) {
-
-        Product product = productService.detailsOfService(productId);
+    @RequestMapping(value = "/getDetailOfAService", method = RequestMethod.GET)
+    public String getDetailOfAService(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int serviceID = Integer.parseInt(request.getParameter("serviceID"));
+        Product product = productService.detailsOfService(serviceID);
         Map productMap = new HashMap();
+        Map responseMap = new HashMap();
         product = HibernateUtil.unproxy(product);
-        productMap.put("productId", product.getProductID());
+        int productID = product.getProductID();
+        productMap.put("serviceID", productID);
+        productMap.put("categoryID", product.getCategory().getCategoryID());
         productMap.put("name", product.getProductName());
         productMap.put("description", product.getProductDescription());
         productMap.put("notes", product.getProductNote());
-        productMap.put("noOfTimeSlot", product.getNoOfTimeSlot());
-        productMap.put("status", product.isStatus());
-        productMap.put("categoryId", product.getCategory().getCategoryID());
 
-        String json = new Gson().toJson(productMap);
+        List<Organization> organizations = organizationService.listOfOrganization();
+        for (Organization organization : organizations) {
+            int slotDuration = organization.getTimeSlotDuration();
+            int noOfSlot = product.getNoOfTimeSlot();
+            productMap.put("duration", slotDuration * noOfSlot);
+        }
+
+        // get default price of this product
+        List<ProductRate> productRates = productRateService.getAllRatesOfAProduct(productID);
+        List allRates = new ArrayList();
+        for (ProductRate pRate : productRates) {
+            Rate rate = rateService.detailsOfRate(pRate.getRate().getRateID());
+            String name = rate.getRateName().trim();
+            if (name.equalsIgnoreCase("default")) {
+                productMap.put("price", rate.getPrice());
+                continue;
+            }
+            Map rateMap = new HashMap();
+            rate = HibernateUtil.unproxy(rate);
+            rateMap.put("rateId", rate.getRateID());
+            rateMap.put("name", name);
+//            rateMap.put("description", rate.getRateDescription().trim());
+            rateMap.put("price", rate.getPrice());
+            allRates.add(rateMap);
+        }
+        if (allRates.size() > 0) {
+            productMap.put("specialPrice", allRates);
+        }
+
+        // get all images of a service
+        List allImages = new ArrayList();
+        List<ProductImage> productImages = productImageService.getAllImagesOfAProduct(productID);
+        for (ProductImage productImage : productImages) {
+            Map productImageMap = new HashMap();
+            productImage = HibernateUtil.unproxy(productImage);
+            productImageMap.put("imageID", productImage.getProductImageID());
+            productImageMap.put("imageUrl", productImage.getImageUrl().trim());
+            allImages.add(productImageMap);
+        }
+        if (allImages.size() > 0) {
+            productMap.put("serviceImage", allImages);
+        }
+
+        responseMap.put("result", productMap);
+        responseMap.put("status", "success");
+
+        String json = new Gson().toJson(responseMap);
         return json;
     }
 
@@ -80,7 +137,7 @@ public class ProductController {
         try {
             int categoryID = Integer.parseInt(request.getParameter("categoryID"));
 
-            if(categoryID >0){
+            if (categoryID > 0) {
                 Category category = categoryService.detailsOfCategory(categoryID);
                 product.setCategory(category);
             }

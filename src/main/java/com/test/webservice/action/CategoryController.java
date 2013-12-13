@@ -2,8 +2,12 @@ package com.test.webservice.action;
 
 import com.generic.entity.Category;
 import com.generic.entity.Product;
+import com.generic.entity.ProductRate;
+import com.generic.entity.Rate;
 import com.generic.service.CategoryService;
+import com.generic.service.ProductRateService;
 import com.generic.service.ProductService;
+import com.generic.service.RateService;
 import com.google.gson.Gson;
 import com.test.webservice.util.HibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,51 +37,98 @@ public class CategoryController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ProductRateService productRateService;
+
+    @Autowired
+    private RateService rateService;
+
     @ResponseBody
     @RequestMapping(value = "/getAllCategories", method = RequestMethod.GET)
     public String getAllCategories() {
+        Map responseMap = new HashMap();
         List allCategories = new ArrayList();
         List<Category> categories = categoryService.listOfCategory();
         for (Category category : categories) {
             Map categoryMap = new HashMap();
             category = HibernateUtil.unproxy(category);
-            categoryMap.put("catId",category.getCategoryID());
-            categoryMap.put("name",category.getCategoryName().trim());
-            categoryMap.put("description",category.getCategoryDescription().trim());
-            categoryMap.put("notes",category.getCategoryNote().trim());
-            categoryMap.put("parentId",category.getParentCatID());
-            categoryMap.put("status",category.isStatus());
+            categoryMap.put("catId", category.getCategoryID());
+            categoryMap.put("name", category.getCategoryName().trim());
+//            categoryMap.put("description",category.getCategoryDescription().trim());
+//            categoryMap.put("notes",category.getCategoryNote().trim());
+//            categoryMap.put("parentId",category.getParentCatID());
+            categoryMap.put("type", 1); // type 1 means parent category
 
 
             allCategories.add(categoryMap);
         }
+        responseMap.put("result", allCategories);
+        responseMap.put("status", "success");
 
-        String json = new Gson().toJson(allCategories);
+        String json = new Gson().toJson(responseMap);
 
         return json;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/allProductsOfACategory", method = RequestMethod.GET)
-    public String getAllProductsOfACategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List allProducts = new ArrayList();
+    @RequestMapping(value = "/allServicesOfACategory", method = RequestMethod.GET)
+    public String allServicesOfACategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Map responseMap = new HashMap();
+        Map serviceCategoryMap = new HashMap();
         int categoryID = Integer.parseInt(request.getParameter("categoryID"));
         if (categoryID > 0) {
+            List allServices = new ArrayList();
             List<Product> products = productService.listOfProductsOfCategory(categoryID);
             for (Product product : products) {
                 Map productMap = new HashMap();
                 product = HibernateUtil.unproxy(product);
-                productMap.put("productId", product.getProductID());
+                productMap.put("serviceId", product.getProductID());
                 productMap.put("name", product.getProductName());
-                productMap.put("description", product.getProductDescription());
-                productMap.put("notes", product.getProductNote());
+//                productMap.put("description", product.getProductDescription());
+//                productMap.put("notes", product.getProductNote());
                 productMap.put("noOfTimeSlot", product.getNoOfTimeSlot());
-                productMap.put("status", product.isStatus());
+//                productMap.put("status", product.isStatus());
+//                productMap.put("type", 3);  // type =3, means service
 
-                allProducts.add(productMap);
+                // get default price of this product
+                List<ProductRate> productRates = productRateService.getAllRatesOfAProduct(product.getProductID());
+                for (ProductRate pRate : productRates) {
+                    Rate rate = rateService.detailsOfRate(pRate.getRate().getRateID());
+                    String name = rate.getRateName().trim();
+                    if(name.equalsIgnoreCase("default")){
+                        productMap.put("price", rate.getPrice());
+                        break;
+                    }
+                }
+
+                allServices.add(productMap);
             }
+
+            // for sub-category
+            List allCategories = new ArrayList();
+            List<Category> categories = categoryService.listOfSubCategory(categoryID);
+            for (Category category : categories) {
+                Map categoryMap = new HashMap();
+                category = HibernateUtil.unproxy(category);
+                categoryMap.put("catId", category.getCategoryID());
+                categoryMap.put("name", category.getCategoryName().trim());
+//                categoryMap.put("description", category.getCategoryDescription().trim());
+//                categoryMap.put("notes", category.getCategoryNote().trim());
+//                categoryMap.put("parentId", category.getParentCatID());
+//                categoryMap.put("status", category.isStatus());
+
+                allCategories.add(categoryMap);
+            }
+            if (allCategories.size() > 0) {
+                serviceCategoryMap.put("subCategory", allCategories);
+            }
+            if (allServices.size() > 0) {
+                serviceCategoryMap.put("services", allServices);
+            }
+            responseMap.put("result", serviceCategoryMap);
+            responseMap.put("status", "success");
         }
-        String json = new Gson().toJson(allProducts);
+        String json = new Gson().toJson(responseMap);
         return json;
     }
 
@@ -89,12 +140,12 @@ public class CategoryController {
         for (Category category : categories) {
             Map categoryMap = new HashMap();
             category = HibernateUtil.unproxy(category);
-            categoryMap.put("catId",category.getCategoryID());
-            categoryMap.put("name",category.getCategoryName().trim());
-            categoryMap.put("description",category.getCategoryDescription().trim());
-            categoryMap.put("notes",category.getCategoryNote().trim());
-            categoryMap.put("parentId",category.getParentCatID());
-            categoryMap.put("status",category.isStatus());
+            categoryMap.put("catId", category.getCategoryID());
+            categoryMap.put("name", category.getCategoryName().trim());
+            categoryMap.put("description", category.getCategoryDescription().trim());
+            categoryMap.put("notes", category.getCategoryNote().trim());
+            categoryMap.put("parentId", category.getParentCatID());
+            categoryMap.put("status", category.isStatus());
 
             allCategories.add(categoryMap);
         }
@@ -109,12 +160,12 @@ public class CategoryController {
         Category category = categoryService.detailsOfCategory(catId);
         Map categoryMap = new HashMap();
         category = HibernateUtil.unproxy(category);
-        categoryMap.put("catId",category.getCategoryID());
-        categoryMap.put("name",category.getCategoryName().trim());
-        categoryMap.put("description",category.getCategoryDescription().trim());
-        categoryMap.put("notes",category.getCategoryNote().trim());
-        categoryMap.put("parentId",category.getParentCatID());
-        categoryMap.put("status",category.isStatus());
+        categoryMap.put("catId", category.getCategoryID());
+        categoryMap.put("name", category.getCategoryName().trim());
+        categoryMap.put("description", category.getCategoryDescription().trim());
+        categoryMap.put("notes", category.getCategoryNote().trim());
+        categoryMap.put("parentId", category.getParentCatID());
+        categoryMap.put("status", category.isStatus());
 
         String json = new Gson().toJson(categoryMap);
         return json;

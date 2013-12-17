@@ -16,16 +16,15 @@ public class Category implements Serializable {
     private String categoryName;
     @Column(length = 1000)
     private String categoryDescription;
-    @Column(nullable=false,columnDefinition="boolean default true")
-    private boolean status;
-    private int parentCatID;
+    private boolean status = true;
+    private int parentCatID = -1;
     private String categoryNote;
 
 
-    @OneToMany(mappedBy="category",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Product> products;
 
-    public Category(){
+    public Category() {
 
     }
 
@@ -87,6 +86,7 @@ public class Category implements Serializable {
     public void setCategoryDescription(String categoryDescription) {
         this.categoryDescription = categoryDescription;
     }
+
     public String getCategoryName() {
         return categoryName;
     }

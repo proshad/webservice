@@ -71,7 +71,7 @@ public class CategoryController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/allServicesOfACategory", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAllSubCategoriesAndServices", method = RequestMethod.GET)
     public String allServicesOfACategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map responseMap = new HashMap();
         Map serviceCategoryMap = new HashMap();
@@ -85,8 +85,8 @@ public class CategoryController {
                 productMap.put("serviceId", product.getProductID());
                 productMap.put("name", product.getProductName());
 //                productMap.put("description", product.getProductDescription());
-//                productMap.put("notes", product.getProductNote());
-                productMap.put("noOfTimeSlot", product.getNoOfTimeSlot());
+                productMap.put("notes", product.getProductNote());
+//                productMap.put("noOfTimeSlot", product.getNoOfTimeSlot());
 //                productMap.put("status", product.isStatus());
 //                productMap.put("type", 3);  // type =3, means service
 
@@ -113,8 +113,8 @@ public class CategoryController {
                 categoryMap.put("catId", category.getCategoryID());
                 categoryMap.put("name", category.getCategoryName().trim());
 //                categoryMap.put("description", category.getCategoryDescription().trim());
-//                categoryMap.put("notes", category.getCategoryNote().trim());
-//                categoryMap.put("parentId", category.getParentCatID());
+                categoryMap.put("notes", category.getCategoryNote().trim());
+//                categoryMap.put("parentId", categoryID);
 //                categoryMap.put("status", category.isStatus());
 
                 allCategories.add(categoryMap);

@@ -26,7 +26,7 @@ public class Organization {
     private String location;
     @Column(length = 500)
     private String tradeLicense;
-    private int timeSlotDuration;
+    private int timeSlotDuration = 30;
 
     public Organization() {
     }

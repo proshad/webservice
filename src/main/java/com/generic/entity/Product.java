@@ -17,8 +17,7 @@ public class Product implements Serializable {
     @Column(length = 1000)
     private String productDescription;
     private String productNote;
-    @Column(nullable=false,columnDefinition="boolean default true")
-    private boolean status;
+    private boolean status = true;
     private int noOfTimeSlot;
 
     @ManyToOne(fetch = FetchType.LAZY)

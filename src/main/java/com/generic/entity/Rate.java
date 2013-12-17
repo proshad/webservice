@@ -18,9 +18,8 @@ public class Rate {
     @Column(length = 1000)
     private String rateDescription;
     @Column(nullable = false, columnDefinition = "boolean default true")
-    private boolean status;
-    @Column(nullable = false)
-    private double price;
+    private boolean status = true;
+    private double price = 0.0;
 
     public Rate() {
     }

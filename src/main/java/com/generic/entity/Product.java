@@ -9,6 +9,7 @@ import java.util.Set;
  * Date: 9/14/13
  */
 @Entity
+@Table(name="Service")
 public class Product implements Serializable {
     @Id
     @GeneratedValue

@@ -8,6 +8,7 @@ import javax.persistence.*;
  * Date: 9/22/13
  */
 @Entity
+@Table(name="ServiceRate")
 public class ProductRate {
     @Id
     @GeneratedValue

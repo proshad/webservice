@@ -7,6 +7,7 @@ import javax.persistence.*;
  * Date: 11/17/13
  */
 @Entity
+@Table(name="EmployeeService")
 public class EmployeeProduct {
     @Id
     @GeneratedValue

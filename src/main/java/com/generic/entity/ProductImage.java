@@ -7,6 +7,7 @@ import javax.persistence.*;
  * Date: 12/5/13
  */
 @Entity
+@Table(name="ServiceImage")
 public class ProductImage {
     @Id
     @GeneratedValue

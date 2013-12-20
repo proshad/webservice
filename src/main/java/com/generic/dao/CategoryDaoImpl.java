@@ -32,7 +32,7 @@ public class CategoryDaoImpl implements CategoryDao {
 //        String q = "from Category";
 //        Query query = session.createQuery(q);
 //        return query.list();
-        return session.createQuery("from Category c where c.parentCatID = :parentCatID").setInteger("parentCatID", 0).list();
+        return session.createQuery("from Category c where c.parentCatID = :parentCatID").setInteger("parentCatID", -1).list();
     }
 
     @Override

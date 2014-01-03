@@ -158,10 +158,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CategoryController.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="CategoryController.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/test/webservice/action/CategoryController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="166" column="33" selection-start="7072" selection-end="7072" vertical-scroll-proportion="0.0">
+            <state line="166" column="33" selection-start="7072" selection-end="7072" vertical-scroll-proportion="0.36072424">
               <folding />
             </state>
           </provider>
@@ -212,10 +212,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserController.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="UserController.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/test/webservice/action/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="44" selection-start="3858" selection-end="3858" vertical-scroll-proportion="-0.7047354">
+            <state line="99" column="44" selection-start="3858" selection-end="3858" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -652,7 +652,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="958" extended-state="0" />
+    <frame x="-8" y="-8" width="1296" height="958" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -803,13 +803,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/webservice/action/CategoryController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="166" column="33" selection-start="7072" selection-end="7072" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/test/webservice/action/EmployeeController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="95" column="38" selection-start="3585" selection-end="3585" vertical-scroll-proportion="0.0">
@@ -856,7 +849,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/test/webservice/action/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="44" selection-start="3858" selection-end="3858" vertical-scroll-proportion="-0.7047354">
+        <state line="99" column="44" selection-start="3858" selection-end="3858" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/test/webservice/action/CategoryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="166" column="33" selection-start="7072" selection-end="7072" vertical-scroll-proportion="0.36072424">
           <folding />
         </state>
       </provider>

@@ -34,7 +34,7 @@ public class OrganizationController {
         for (Organization organization : organizations) {
             Map organizationMap = new HashMap();
             organization = HibernateUtil.unproxy(organization);
-            organizationMap.put("organizationId", organization.getOrganizationID());
+            organizationMap.put("organizationID", organization.getOrganizationID());
             organizationMap.put("name", organization.getName().trim());
             organizationMap.put("description", organization.getDescription().trim());
             organizationMap.put("tradingHour", organization.getTradingHour().trim());
@@ -58,7 +58,7 @@ public class OrganizationController {
         Organization organization = organizationService.detailsOfOrganization(organizationId);
         Map organizationMap = new HashMap();
         organization = HibernateUtil.unproxy(organization);
-        organizationMap.put("organizationId", organization.getOrganizationID());
+        organizationMap.put("organizationID", organization.getOrganizationID());
         organizationMap.put("name", organization.getName().trim());
         organizationMap.put("description", organization.getDescription().trim());
         organizationMap.put("tradingHour", organization.getTradingHour().trim());

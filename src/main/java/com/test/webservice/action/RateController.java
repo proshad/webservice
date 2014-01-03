@@ -44,7 +44,7 @@ public class RateController {
         for (Rate rate : rates) {
             Map rateMap = new HashMap();
             rate = HibernateUtil.unproxy(rate);
-            rateMap.put("rateId", rate.getRateID());
+            rateMap.put("rateID", rate.getRateID());
             rateMap.put("name", rate.getRateName().trim());
             rateMap.put("description", rate.getRateDescription().trim());
             rateMap.put("price", rate.getPrice());
@@ -62,7 +62,7 @@ public class RateController {
         Rate rate = rateService.detailsOfRate(rateId);
         Map rateMap = new HashMap();
         rate = HibernateUtil.unproxy(rate);
-        rateMap.put("rateId", rate.getRateID());
+        rateMap.put("rateID", rate.getRateID());
         rateMap.put("name", rate.getRateName().trim());
         rateMap.put("description", rate.getRateDescription().trim());
         rateMap.put("price", rate.getPrice());
@@ -145,7 +145,7 @@ public class RateController {
                 Rate rate = rateService.detailsOfRate(pRate.getRate().getRateID());
                 Map rateMap = new HashMap();
                 rate = HibernateUtil.unproxy(rate);
-                rateMap.put("rateId", rate.getRateID());
+                rateMap.put("rateID", rate.getRateID());
                 rateMap.put("name", rate.getRateName().trim());
                 rateMap.put("description", rate.getRateDescription().trim());
                 rateMap.put("price", rate.getPrice());

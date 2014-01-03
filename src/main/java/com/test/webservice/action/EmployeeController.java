@@ -49,7 +49,7 @@ public class EmployeeController {
         for (Employee employee : employees) {
             Map employeeMap = new HashMap();
             employee = HibernateUtil.unproxy(employee);
-            employeeMap.put("employeeId", employee.getEmployeeID());
+            employeeMap.put("employeeID", employee.getEmployeeID());
             employeeMap.put("firstName", employee.getFirstName().trim());
             employeeMap.put("lastName", employee.getLastName().trim());
             employeeMap.put("designation", employee.getDesignation().trim());
@@ -78,7 +78,7 @@ public class EmployeeController {
 
         Map employeeMap = new HashMap();
         employee = HibernateUtil.unproxy(employee);
-        employeeMap.put("employeeId", employee.getEmployeeID());
+        employeeMap.put("employeeID", employee.getEmployeeID());
         employeeMap.put("firstName", employee.getFirstName().trim());
         employeeMap.put("lastName", employee.getLastName().trim());
         employeeMap.put("designation", employee.getDesignation().trim());
@@ -91,9 +91,9 @@ public class EmployeeController {
         List allProducts = new ArrayList();
         for (EmployeeProduct employeeProduct : employeeProducts) {
             Map productMap = new HashMap();
-            productMap.put("productId", employeeProduct.getProduct().getProductID());
+            productMap.put("productID", employeeProduct.getProduct().getProductID());
             productMap.put("productName", employeeProduct.getProduct().getProductName());
-            productMap.put("categoryId", employeeProduct.getProduct().getCategory().getCategoryID());
+            productMap.put("categoryID", employeeProduct.getProduct().getCategory().getCategoryID());
             productMap.put("categoryName", employeeProduct.getProduct().getCategory().getCategoryName());
 
             allProducts.add(productMap);

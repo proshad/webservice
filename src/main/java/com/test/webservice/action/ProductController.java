@@ -50,13 +50,13 @@ public class ProductController {
         for (Product product : products) {
             Map productMap = new HashMap();
             product = HibernateUtil.unproxy(product);
-            productMap.put("productId", product.getProductID());
+            productMap.put("productID", product.getProductID());
             productMap.put("name", product.getProductName());
 //            productMap.put("description", product.getProductDescription());
 //            productMap.put("notes", product.getProductNote());
             productMap.put("noOfTimeSlot", product.getNoOfTimeSlot());
 //            productMap.put("status", product.isStatus());
-            productMap.put("categoryId", product.getCategory().getCategoryID());
+            productMap.put("categoryID", product.getCategory().getCategoryID());
 
 
             allProducts.add(productMap);
@@ -75,7 +75,7 @@ public class ProductController {
         product = HibernateUtil.unproxy(product);
         int productID = product.getProductID();
         productMap.put("serviceID", productID);
-        productMap.put("categoryID", product.getCategory().getCategoryID());
+        productMap.put("parentID", product.getCategory().getCategoryID());
         productMap.put("name", product.getProductName());
         productMap.put("description", product.getProductDescription());
         productMap.put("notes", product.getProductNote());
@@ -99,7 +99,7 @@ public class ProductController {
             }
             Map rateMap = new HashMap();
             rate = HibernateUtil.unproxy(rate);
-            rateMap.put("rateId", rate.getRateID());
+            rateMap.put("rateID", rate.getRateID());
             rateMap.put("name", name);
 //            rateMap.put("description", rate.getRateDescription().trim());
             rateMap.put("price", rate.getPrice());

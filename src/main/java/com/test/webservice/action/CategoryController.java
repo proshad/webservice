@@ -52,7 +52,7 @@ public class CategoryController {
         for (Category category : categories) {
             Map categoryMap = new HashMap();
             category = HibernateUtil.unproxy(category);
-            categoryMap.put("catId", category.getCategoryID());
+            categoryMap.put("catID", category.getCategoryID());
             categoryMap.put("name", category.getCategoryName().trim());
 //            categoryMap.put("description",category.getCategoryDescription().trim());
 //            categoryMap.put("notes",category.getCategoryNote().trim());
@@ -82,7 +82,7 @@ public class CategoryController {
             for (Product product : products) {
                 Map productMap = new HashMap();
                 product = HibernateUtil.unproxy(product);
-                productMap.put("serviceId", product.getProductID());
+                productMap.put("serviceID", product.getProductID());
                 productMap.put("name", product.getProductName());
 //                productMap.put("description", product.getProductDescription());
                 productMap.put("notes", product.getProductNote());
@@ -110,7 +110,7 @@ public class CategoryController {
             for (Category category : categories) {
                 Map categoryMap = new HashMap();
                 category = HibernateUtil.unproxy(category);
-                categoryMap.put("catId", category.getCategoryID());
+                categoryMap.put("catID", category.getCategoryID());
                 categoryMap.put("name", category.getCategoryName().trim());
 //                categoryMap.put("description", category.getCategoryDescription().trim());
                 categoryMap.put("notes", category.getCategoryNote().trim());
@@ -140,11 +140,11 @@ public class CategoryController {
         for (Category category : categories) {
             Map categoryMap = new HashMap();
             category = HibernateUtil.unproxy(category);
-            categoryMap.put("catId", category.getCategoryID());
+            categoryMap.put("catID", category.getCategoryID());
             categoryMap.put("name", category.getCategoryName().trim());
             categoryMap.put("description", category.getCategoryDescription().trim());
             categoryMap.put("notes", category.getCategoryNote().trim());
-            categoryMap.put("parentId", category.getParentCatID());
+            categoryMap.put("parentID", category.getParentCatID());
             categoryMap.put("status", category.isStatus());
 
             allCategories.add(categoryMap);
@@ -160,11 +160,11 @@ public class CategoryController {
         Category category = categoryService.detailsOfCategory(catId);
         Map categoryMap = new HashMap();
         category = HibernateUtil.unproxy(category);
-        categoryMap.put("catId", category.getCategoryID());
+        categoryMap.put("catID", category.getCategoryID());
         categoryMap.put("name", category.getCategoryName().trim());
         categoryMap.put("description", category.getCategoryDescription().trim());
         categoryMap.put("notes", category.getCategoryNote().trim());
-        categoryMap.put("parentId", category.getParentCatID());
+        categoryMap.put("parentID", category.getParentCatID());
         categoryMap.put("status", category.isStatus());
 
         String json = new Gson().toJson(categoryMap);

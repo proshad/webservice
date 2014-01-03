@@ -34,7 +34,7 @@ public class RosterController {
         for (Roster roster : rosters) {
             Map rosterMap = new HashMap();
             roster = HibernateUtil.unproxy(roster);
-            rosterMap.put("id", roster.getRosterID());
+            rosterMap.put("ID", roster.getRosterID());
             rosterMap.put("name", roster.getName().trim());
             rosterMap.put("day", roster.getDay().trim());
             rosterMap.put("startTime", roster.getStartTime());
@@ -52,7 +52,7 @@ public class RosterController {
         Roster roster = rosterService.detailsOfRoster(rosterId);
         Map rosterMap = new HashMap();
         roster = HibernateUtil.unproxy(roster);
-        rosterMap.put("id", roster.getRosterID());
+        rosterMap.put("ID", roster.getRosterID());
         rosterMap.put("name", roster.getName().trim());
         rosterMap.put("day", roster.getDay().trim());
         rosterMap.put("startTime", roster.getStartTime());

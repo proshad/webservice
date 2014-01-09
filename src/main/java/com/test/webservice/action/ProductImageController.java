@@ -23,7 +23,7 @@ import java.util.Map;
  * Date: 12/5/13
  */
 @Controller
-@RequestMapping("/productImage")
+@RequestMapping("/serviceImage")
 public class ProductImageController {
     @Autowired
     private ProductImageService productImageService;
@@ -32,7 +32,7 @@ public class ProductImageController {
     private ProductService productService;
 
     @ResponseBody
-    @RequestMapping(value = "/getAllImagesOfAProduct", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAllImagesOfAService", method = RequestMethod.GET)
     public String getAllImagesOfAProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List allImages = new ArrayList();
         int productID = Integer.parseInt(request.getParameter("productID"));

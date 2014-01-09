@@ -87,7 +87,6 @@ public class CategoryController {
 //                productMap.put("description", product.getProductDescription());
                 productMap.put("notes", product.getProductNote());
 //                productMap.put("noOfTimeSlot", product.getNoOfTimeSlot());
-//                productMap.put("status", product.isStatus());
 //                productMap.put("type", 3);  // type =3, means service
 
                 // get default price of this product

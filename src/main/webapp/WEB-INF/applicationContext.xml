@@ -19,4 +19,19 @@
  
 	<import resource="datasource-context.xml" />
 
+
+    <bean id="trainyAppsXmlView"
+          class="org.springframework.web.servlet.view.xml.MarshallingView">
+        <constructor-arg>
+            <bean class="org.springframework.oxm.xstream.XStreamMarshaller">
+                <property name="autodetectAnnotations" value="true"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
 </beans>

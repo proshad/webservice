@@ -55,6 +55,6 @@ public class AdminController {
 
         map.put("categories",jArrayCategories);
 
-        return "index";
+        return "category";
     }
 }

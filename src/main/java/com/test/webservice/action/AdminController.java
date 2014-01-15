@@ -42,7 +42,7 @@ public class AdminController {
     private RateService rateService;
 
 
-    @RequestMapping(value = "/category")
+    @RequestMapping(value = "/addCategory")
     public String category(ModelMap map) throws Exception {
         JSONArray jArrayCategories = new JSONArray();
         List<Category> categories = categoryService.listOfCategory();
@@ -55,6 +55,6 @@ public class AdminController {
 
         map.put("categories",jArrayCategories);
 
-        return "category";
+        return "addcategory";
     }
 }

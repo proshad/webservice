@@ -1,0 +1,887 @@
+/* begin font definition */
+body.form-page {
+  font-family: "Museo Sans 300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:16px;
+  line-height:normal;
+}
+.form-page h1 {
+  font-size:36px;
+  line-height:normal;
+}
+.form-page .tips p {
+  font-size:12px;
+  line-height:14px;
+}
+.form-control {
+  width:97.8%;
+}
+.col-account-info .form-control {
+  width: 97%;
+}
+.field-container-single-row .form-control {
+  width:97.2%;
+}
+
+body.view-page,
+body.search-page {
+  font-family: "Museo Sans 300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:18px;
+  line-height:22px;
+}
+.view-page h1,
+.search-page h1 {
+  font-family: "Museo Sans 900", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:40px;
+  line-height:normal;
+}
+
+/* end font definition */
+
+#header {
+  position: fixed;
+  top:0;
+  background-color:#111111;
+  color:#FFF;
+  width:100%;
+  height:40px;
+  margin:0;
+  z-index: 100;
+}
+
+#body {
+  margin-top:40px;
+  width:100%;
+  background-color:#f2f2f2;
+  color:#111111;
+}
+#body > .container {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 15px;
+}
+
+#body > .container div {
+  overflow:hidden;
+}
+
+a {
+  color:#009990;
+  text-decoration:none;
+}
+
+a:hover {
+  text-decoration:underline;
+}
+
+h1 {
+  margin-bottom:20px;
+}
+
+#footer {
+  width:100%;
+  background-color:#ff513a;
+  color:#FFFFFF;
+  min-height:165px;
+}
+
+.field-container.relative-position .field-edit-link {
+  position: absolute;
+  right: 15px;
+  top: 6px;
+}
+
+.avatar.relative-position .avatar-edit-link {
+  background-color: #FFFFFF;
+  bottom: 10px;
+  padding: 8px 15px;
+  position: absolute;
+  right: 10px;
+}
+
+.field-container-single-row .label {
+  float:left;
+  width:13.55%;
+  padding:6px 0;
+}
+
+.field-container-single-row .field {
+  float:left;
+  width:86.45%;
+}
+
+.field-container-single-row .small-field {
+  float:left;
+  width:36.45%;
+  padding-right:4%;
+}
+
+.field-container-single-row .tips {
+  float: left;
+  width: 46%;
+}
+
+.field-container-single-row .tips p {
+  padding-right:15px;
+}
+
+.field-container p {
+  margin-bottom:0;
+}
+
+span.linkedin-logo {
+  background: url("../gfx/linked-logo-36x36.jpg") no-repeat 0 0 transparent;
+  width:36px;
+  height:36px;
+  display:inline-block;
+  padding-right:10px;
+}
+
+.linkedin-field-container.relative-position span.linkedin-logo {
+  position: absolute;
+  left:8px;
+  top:5px;
+}
+
+.linkedin-field-container.relative-position span.linkedin-link {
+  position: absolute;
+  right: 14px;
+  top: 13px;
+}
+
+.linkedin-field-container .form-control {
+  padding-left:56px;
+  width:90%;
+}
+
+.media-upload-field-container .label {
+  float:left;
+  width:28%;
+  padding:6px 0;
+}
+
+.media-upload-field-container .field {
+  float:left;
+  width:72%;
+}
+
+.media-upload-field-container .form-control {
+  width:96.8%;
+}
+
+.collection-field-group {
+
+}
+
+.collection-field-group .add-link {
+  display:inline-block;
+  background-color:#FFFFFF;
+  padding:7px 15px;
+  margin-left:10px;
+}
+.collection-field-group .add-link a {
+  font-size:20px;
+  line-height:20px;
+}
+.collection-field-group .add-link a:hover {
+  text-decoration:none;
+}
+
+.collection-field-group .collection-field-group-container {
+  background-color:#FFFFFF;
+  margin-top:10px;
+  padding:15px;
+  border: 1px solid #cccccc;
+  border-radius:0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.collection-field-group-container .field-container .label {
+  float:left;
+  width:22.5%;
+  padding:6px 0;
+}
+.collection-field-group-container .field-container .field {
+  float:left;
+  width:76.5%;
+}
+.collection-field-group-container .field-container .field .form-control {
+  width:97%;
+}
+.collection-field-group .collection-field-group-container .field-container:last-child {
+  margin-bottom:0;
+}
+
+.form-footer {
+  background: url("../gfx/form-footer-background.png") repeat-x scroll center bottom #F2F2F2;
+  margin-bottom: 100px;
+  padding: 40px 0;
+}
+
+.form-footer .page-top-link {
+  border-bottom: 1px solid #CCCCCC;
+  border-top: 1px solid #CCCCCC;
+  margin-bottom: 20px;
+  padding: 5px 15px;
+}
+
+.form-footer .page-top-link span a {
+  background: url("../gfx/arrow-top.png") no-repeat 0 0 #F2F2F2;
+  width:19px;
+  height:13px;
+  padding:1px;
+  margin-left:5px;
+  display:inline-block;
+}
+.form-footer .page-top-link span a:hover,
+.form-footer .page-top-link span a:active {
+  text-decoration:none;
+}
+
+.form-footer .buttons {
+  margin: 40px 15px 0 15px;
+}
+
+.form-footer .buttons .button {
+  font-size:15px;
+  padding:10px 20px;
+  margin:0;
+  border:none;
+}
+
+.form-footer .buttons .preview-button {
+  background-color:#FFFFFF;
+  color:#009990;
+}
+
+.form-footer .buttons .publish-button {
+  color:#FFFFFF;
+  background-color:#009990;
+  margin-left:40px;
+}
+
+.period-field {
+  height: 35px;
+}
+
+.period-field span.fromLabel {
+  float:left;
+  margin-right:5px;
+  padding:6px 0;
+}
+
+.period-field span.toLabel {
+  float: left;
+  margin-left:5px;
+  margin-right:5px;
+  padding:6px 0;
+}
+.period-field select.form-control {
+  float: left;
+  height: 34px !important;
+}
+.period-field select.catDropDown {
+  width:20% !important;
+}
+.period-field select.yearDropDown  {
+  width:16.4% !important;
+}
+.period-field select.form-control option {
+  padding:3px;
+}
+.page-top-link > span {
+  line-height: 16px;
+}
+/* CSS design for Create R&D Page */
+.relative-position span.linkToSite-link {
+  position: absolute;
+  right: 12px;
+  top: 7px;
+}
+.contact-field-group .label {
+  padding:9px 0;
+}
+.contact-field-group p.contact-info {
+  clear:both;
+  overflow:hidden;
+  width:100%;
+  margin-bottom: 10px;
+}
+.contact-field-group p.contact-info span.name {
+  float:left;
+  padding:9px 0;
+}
+.contact-field-group p.contact-info span.avatar {
+  float:left;
+  display:inline-block;
+  margin-left:15px;
+}
+.contact-field-group p.contact-info span.avatar a {
+
+}
+.contact-field-group p.contact-info span.avatar img {
+  width:40px;
+  height:40px;
+}
+.contact-field-group p.contact-info span.delete-link {
+  float:left;
+  display:inline-block;
+  margin-left:15px;
+  background-color: #FFFFFF;
+  padding: 10px 15px;
+}
+.contact-field-group .add-link {
+  display:inline-block;
+  background-color:#FFFFFF;
+  padding:8px 15px;
+  margin-left:0;
+}
+.contact-field-group .add-link a {
+  font-size:20px;
+  line-height:20px;
+}
+.contact-field-group .add-link a:hover {
+  text-decoration:none;
+}
+/* css style related with view cv page */
+.currentOrganization {
+
+}
+
+.currentOrganization p {
+  margin-bottom:5px;
+}
+
+.cv-page  h1 {
+  margin-top:30px;
+}
+
+.cv-page .location {
+  margin-top:20px;
+}
+
+.linkedinProfile p {
+  background: url("../gfx/linked-logo-38x38.jpg") no-repeat scroll 0 0 transparent;
+  height:38px;
+  line-height:38px;
+  padding:0 0 0 45px;
+  margin:0;
+}
+
+.tags {
+  margin:20px 0 0 0;
+}
+.tags span.label {
+
+}
+.tags ul {
+  display:inline;
+  margin:0 0 0 20px;
+  padding:0;
+  list-style:none;
+}
+.tags ul li {
+  display:inline-block;
+  margin:0 0 0 5px;
+  padding:0;
+}
+.tags ul li a {
+  display:inline-block;
+  background: #FFFFFF;
+  padding:2px 5px;
+  border:1px solid #cccccc;
+}
+.cv-page .shortDescription p {
+  font-family: "Museo Sans 500","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-style:italic;
+  font-size:24px;
+  line-height:26px;
+  margin:20px 0 30px 0;
+  padding:0;
+}
+.related-media-description p {
+  font-family: "Museo Sans 900","Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin:0 0 20px 0;
+  padding:0;
+}
+
+.row.work-experience,
+.row.education {
+  margin-top:60px;
+}
+.row.contact-info {
+  margin:60px 0;
+}
+.row.work-experience h3,
+.row.education h3 {
+  border-top: 1px solid #CCCCCC;
+  font-family: "Museo Sans 900","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 30px;
+  line-height: normal;
+  padding-top: 5px;
+}
+.row.work-experience ul,
+.row.education ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.row.work-experience li,
+.row.education li {
+  margin:15px 0 0 0;
+  padding:0;
+}
+.row.work-experience h4,
+.row.education h4 {
+  font-family: "Museo Sans 900","Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin:0 0 2px 0;
+}
+.row.work-experience p,
+.row.education p {
+  margin:0;
+  padding:0;
+}
+.row.work-experience .time-period,
+.row.education .time-period {
+  font-family: "Museo Sans 900","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.row.work-experience p.description,
+.row.education p.description {
+  font-family: "Museo Sans 500","Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin:15px 0 0 0;
+  padding:0;
+}
+p.contact-link a {
+  background: #FFFFFF;
+  display:inline-block;
+  padding:7px 10px;
+}
+
+/* view rnd page */
+.rnd-page h1 {
+  margin-top:30px;
+  margin-bottom:5px;
+}
+.rnd-page .publish-date {
+  color: #acacac;
+}
+.rnd-page .contact {
+  margin:10px 0;
+}
+.rnd-page ul.contact-info {
+  display: inline;
+  list-style: none outside none;
+  margin:0;
+  padding:0;
+}
+ul.contact-info li {
+  display: inline-block;
+  margin: 0 5px 0 15px;
+  padding: 0;
+}
+ul.contact-info li span.name {
+
+}
+ul.contact-info li span.avatar {
+  display: inline-block;
+  margin-left: 5px;
+}
+ul.contact-info li span.avatar a {
+
+}
+ul.contact-info li span.avatar img {
+  width:40px;
+  height:40px;
+}
+.rnd-page .tags ul {
+  margin-left:40px;
+}
+.rnd-page .media {
+  margin-top:10px;
+}
+.rnd-page .mediaDescription {
+  font-family: "Museo Sans 900","Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin:5px 0 20px 0;
+}
+.rnd-page .mainDescription h2 {
+  font-family: "Museo Sans 700","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:18px;
+  line-height:22px;
+  margin:0;
+  padding:0;
+}
+.rnd-page .mainDescription p {
+  margin:0 0 20px 0;
+}
+.rnd-page .mainDescription h3 {
+  font-family: "Museo Sans 700","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:18px;
+  line-height:22px;
+  margin:20px 0 5px 0;
+  padding:0;
+}
+.rnd-page .linkToSite{
+  margin:20px 0 0 0;
+}
+.rnd-page .linkToSite span.label {
+  margin-right:10px;
+}
+.rnd-page .linkToSite span.link {
+
+}
+.rnd-page .linkToSite span.link a {
+  text-decoration:underline;
+}
+.shareButtons {
+  margin:25px 0 50px 0;
+}
+.shareButtons span.label {
+  padding:0;
+  margin:0 52px 0 0;
+}
+.shareButtons span.buttons {
+  margin:0;
+}
+.shareButtons span.buttons > span {
+  margin:0 10px 0 0;
+}
+.shareButtons span.buttons a,
+.shareButtons span.buttons a:hover {
+  text-decoration:none;
+}
+
+/* cv search page */
+.cv-list .search-form {
+  margin:15px 0;
+  position:relative;
+}
+.cv-list .search-result {
+  margin-bottom:30px;
+}
+.cv-list .search-result h5 {
+  font-weight:bold;
+}
+.cv-list .search-result h5 .search-result-count {
+  font-weight:normal;
+}
+.cv-list .search-result ul {
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.cv-list .search-result ul li {
+  clear:both;
+  overflow:hidden;
+  margin-bottom:15px;
+}
+.cv-list .search-result ul li > div {
+  overflow:visible !important;
+}
+.cv-list .search-result div.avatar {
+  float:left;
+}
+.cv-list .search-result div.profile {
+  margin-left:95px;
+  padding-top:5px;
+  border-top:1px solid #cccccc;
+}
+.cv-list .search-result div.profile h4 {
+  margin:0;
+  padding:0;
+}
+.cv-list .search-result div.profile p {
+  margin:0;
+  padding:0;
+}
+.cv-list .search-result div.profile .date {
+  color:#999999;
+}
+.cv-list .search-result .avatar img {
+  width:84px;
+  height:84px;
+}
+.search-form .search-selector {
+  background: url("../gfx/search-dropdown.png") no-repeat scroll 0 0 transparent;
+  display: inline-block;
+  width: 51px;
+  height: 40px;
+  margin: 4px 0;
+  position: absolute;
+}
+.search-form .search-selector {
+  background: url("../gfx/search-dropdown.png") no-repeat 0 0 transparent;
+  display:inline-block;
+  width:51px;
+  height:40px;
+}
+.search-form .search-box {
+  background-color: #FFFFFF;
+  background-image: none;
+  border: 1px solid #CCCCCC;
+  border-radius: 0;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  color: #555555;
+  display: inline-block;
+  height: 24px;
+  left: 52px;
+  margin: 4px 0;
+  padding: 6px 12px;
+  position: absolute;
+  top: 1px;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  vertical-align: middle;
+  width: 400px;
+}
+.search-form input.button {
+  background: url("../gfx/search-button.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+  border: medium none;
+  cursor: pointer;
+  display: inline-block;
+  height: 48px;
+  margin-left: 477px;
+  width: 56px;
+}
+
+/* css design for homepage */
+body.homepage {
+  font-family: "Museo Sans 300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: url("../gfx/frontpage-main-background.jpg") repeat-x 0 0 #A61200;
+  font-size: 14px;
+  line-height: 18px;
+}
+body.homepage .homepage-container {
+  width:860px;
+  height:800px;
+  margin: 0 auto;
+  padding:0;
+  position:relative;
+}
+.homepage-container div.graphic-background {
+  background:url("../gfx/frontpage-design-background.jpg");
+  width:592px;
+  height:394px;
+  position:absolute;
+  right:0;
+  top:25px;
+}
+.homepage-container .header {
+  height:25px;
+}
+.homepage-container .header .logo {
+  float: left;
+  margin-left: 50px;
+  margin-top: 4px;
+}
+.homepage-container .header .logo h1 {
+  display:none;
+}
+.homepage-container .header .login {
+  float:right;
+  margin-right:50px;
+  margin-top: 4px;
+}
+.homepage-container .header .login p {
+  margin:0;
+  padding:0;
+}
+.homepage-container div.top {
+  text-align: center;
+  position:absolute;
+  left:0;
+  top:90px;
+  z-index:100;
+}
+.homepage-container div.top h2 {
+  font-family: "Museo Sans 300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:100px;
+  line-height:normal;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#A61200;
+  z-index:100;
+}
+.homepage-container .content {
+  font-family: "Museo Sans 300","Helvetica Neue",Helvetica,Arial,sans-serif;
+  top: 440px;
+  left: 40px;
+  position: absolute;
+  width: 370px;
+  color: #111111;
+}
+.homepage-container .content .row2 {
+  font-family: "Museo Sans 700","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.homepage-container .contact {
+  font-family: "Museo Sans 300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color:#FFFFFF;
+  margin-top:40px;
+}
+.homepage-container .contact p {
+  font-family: "Museo Sans 500", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin:0;
+  padding:0;
+}
+.homepage-container .contact p.companyname {
+  font-family: "Museo Sans 300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-bottom: 20px;
+}
+.homepage-container .contact p.address {
+  margin-bottom:20px;
+}
+
+.header-container {
+  width:100%;
+  margin:0 auto;
+  font-family: "Museo Sans 300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:18px;
+  line-height:40px;
+  color:#F2F2F2;
+}
+.header-container img {
+  margin:0;
+  padding:0;
+  vertical-align: top;
+}
+.header-container .logo {
+  float:left;
+  width:40px;
+  height:40px;
+}
+.header-container .logo img {
+  width:40px;
+  height:40px;
+}
+.header-container .sitename {
+  float:left;
+  margin-left:35px;
+  height:40px;
+}
+.header-container .sitename h1 {
+  font-family: "Museo Sans 700", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:18px;
+  line-height:40px;
+  margin:0;
+  padding:0;
+  color:#FF513A;
+  text-transform:uppercase;
+}
+.header-container .menu {
+  position:relative;
+  float:left;
+  margin-left:45px;
+}
+.header-container .menu a {
+  color:#F2F2F2;
+}
+.header-container .menu .selector {
+  background:url("../gfx/menu-select.png") no-repeat 0 0 transparent;
+  width:22px;
+  height:19px;
+  margin:11px 0 10px 0;
+  position: absolute;
+  top:0;
+  left:0;
+  cursor:pointer;
+}
+.header-container .menu .selected {
+  margin-left:10px;
+  line-height:40px;
+  text-decoration:underline;
+  position: absolute;
+  top:0;
+  left:25px;
+}
+.header-container .menu ul {
+  display:none;
+  width:170px;
+  background-color:#111111;
+  opacity:0.80;
+  margin:0;
+  padding:0;
+  list-style:none;
+
+  position:absolute;
+  left:0;
+  top:40px;
+}
+.header-container .menu ul li {
+  height:30px;
+  line-height:30px;
+  border-left:2px solid #009990;
+  border-right:2px solid #009990;
+  border-bottom:2px solid #009990;
+}
+.header-container .menu ul li a {
+  margin-left:32px;
+}
+.header-container .menu .bottom-arrow {
+  background: url("../gfx/menu-bottom-arrow.png") no-repeat 0 0 transparent;
+  width: 19px;
+  height: 12px;
+  position: absolute;
+  top: 38px;
+  left: 2px;
+}
+.header-container .profile-menu {
+  float:right;
+}
+.header-container .profile-menu ul {
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.header-container .profile-menu ul li {
+  display: inline-block;
+  margin:0 15px 0 0;
+  padding:0;
+}
+.header-container .profile-menu a {
+  color:#009990;
+  text-decoration:underline;
+}
+.header-container .profile-menu img.avatar {
+  width:40px;
+  height:40px;
+}
+.footer-container {
+  width:100%;
+  margin:0 auto;
+  padding:0;
+  font-family: "Museo Sans 500", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:16px;
+  line-height:18px;
+  color:#F2F2F2;
+}
+.footer-container a {
+  color:#F2F2F2;
+  text-decoration:underline;
+}
+.footer-container p {
+  margin:0;
+  padding:0;
+}
+.footer-container ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.footer-container .column {
+  float:left;
+  width:25%;
+  padding-top:4%;
+  padding-bottom:4%;
+}
+.footer-container .column-1 {
+  padding-left:5%;
+  padding-right:3%;
+}
+.footer-container .column-2 {
+  padding-left: 6%;
+  padding-right: 3%;
+}
+.footer-container .column-3 {
+  padding-left:5%;
+  padding-right:3%;
+}

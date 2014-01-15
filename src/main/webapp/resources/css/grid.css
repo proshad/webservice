@@ -1,0 +1,83 @@
+.row {
+  width: 100%;
+  clear: both;
+}
+
+.col {
+  float:left;
+  margin-left:2.80%;
+}
+
+.col-avatar {
+  width:22.75%;
+  margin-left:0;
+}
+
+.col-account-info {
+  width:74.45%;
+}
+
+.view-page .col-avatar {
+  width:17%;
+  margin-left:0;
+}
+
+.view-page .col-account-info {
+  width:80.2%;
+}
+
+@media (min-width:600px) {
+  .view-page .col-avatar {
+    width:26%;
+  }
+
+  .view-page .col-account-info {
+    width:71.2%;
+  }
+}
+
+@media (min-width:760px) {
+  .view-page .col-avatar {
+    width:20%;
+  }
+
+  .view-page .col-account-info {
+    width:77.2%;
+  }
+}
+
+@media (min-width:890px) {
+  .view-page .col-avatar {
+    width:17%;
+  }
+
+  .view-page .col-account-info {
+    width:80.2%;
+  }
+}
+
+@media (max-width:500px) {
+  .col-avatar {
+    display:block;
+    float:none;
+    width:100% !important;
+    margin-left:0;
+    margin-bottom:15px;
+  }
+  .col-account-info {
+    display:block;
+    float:none;
+    width:100% !important;
+    margin-left:0;
+  }
+}
+
+@media (min-width:501px) and (max-width:599px) {
+  .col-avatar {
+    width:28% !important;
+  }
+
+  .col-account-info {
+    width:69.2% !important;
+  }
+}

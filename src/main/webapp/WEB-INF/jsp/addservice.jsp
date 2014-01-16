@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <title>Category</title>
+    <title>Add Service</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/default.css'/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/grid.css'/>"/>
@@ -25,60 +25,70 @@
                 var category = arrCategories[i];
                 var option = $('<option/>');
                 option.attr({ 'value': category.catID }).text(category.name);
-                $('#parentCatID').append(option);
+                $('#categoryID').append(option);
             }
         }
     </script>
 </head>
-<body class="form-page" data-type="category" onload="init()">
+<body class="form-page" data-type="service" onload="init()">
 <div id="body">
     <div class="container">
-        <h3>Add Category</h3>
+        <h3>Add Service</h3>
 
         <div class="form-container">
-            <form id="frmAddCategory" action="../category/saveOrUpdate" method="POST">
+            <form id="frmAddCategory" action="../service/saveOrUpdate" method="POST">
 
                 <div class="field-group collection-field-group advanced-field-group">
                     <div class="collection-field-group-container">
                         <div class="field-container">
                             <div class="label">
-                                <label for="categoryName">Category Name:</label>
+                                <label for="productName">Service Name:</label>
                             </div>
                             <div class="field">
-                                <input type="text" name="categoryName" id="categoryName" class="form-control"/>
+                                <input type="text" name="productName" id="productName" class="form-control"/>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="field-container">
                             <div class="label">
-                                <label for="categoryDescription">Category Description:</label>
+                                <label for="productDescription">Service Description:</label>
                             </div>
                             <div class="field">
-                                <textarea name="categoryDescription" id="categoryDescription" class="form-control"
+                                <textarea name="productDescription" id="productDescription" class="form-control"
                                           rows="5"></textarea>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="field-container">
                             <div class="label">
-                                <label for="categoryNote">Category Note:</label>
+                                <label for="productNote">Service Note:</label>
                             </div>
                             <div class="field">
-                                <input type="text" name="categoryNote" id="categoryNote" class="form-control"/>
+                                <input type="text" name="productNote" id="productNote" class="form-control"/>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="field-container">
                             <div class="label">
-                                <label for="parentCatID">Parent Category:</label>
+                                <label for="noOfTimeSlot">No of Time Slot:</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" name="noOfTimeSlot" id="noOfTimeSlot"  maxlength="4" size="4"/>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="field-container">
+                            <div class="label">
+                                <label for="categoryID">Category:</label>
                             </div>
                             <div class="field period-field">
-                                <select class="catDropDown form-control" name="parentCatID" id="parentCatID">
+                                <select class="catDropDown form-control" name="categoryID" id="categoryID">
                                     <option value="-1" selected="selected">Select</option>
                                 </select>
                             </div>
                             <div class="clearfix"></div>
                         </div>
+
                         <div class="field-container">
                             <div class="label">
                                 <label></label>
@@ -86,7 +96,6 @@
                             <div class="field">
                                 <input type="submit" value="Submit"/>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
 
                     </div>

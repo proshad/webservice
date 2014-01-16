@@ -11,6 +11,8 @@ import java.util.List;
 public interface CategoryService {
     public List<Category> listOfCategory();
 
+    public List<Category> listOfAllCategoriesAndSubCategory();
+
     public List<Category> listOfSubCategory(int catID);
 
     public void saveOrUpdate(Category category);

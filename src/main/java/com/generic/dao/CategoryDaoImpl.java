@@ -36,6 +36,14 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
+    public List<Category> listOfAllCategoriesAndSubCategory() {
+        Session session = sessionFactory.getCurrentSession();
+        String q = "from Category";
+        Query query = session.createQuery(q);
+        return query.list();
+    }
+
+    @Override
     public List<Category> listOfSubCategory(int parentCatID) {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Category c where c.parentCatID = :parentCatID").setInteger("parentCatID", parentCatID).list();

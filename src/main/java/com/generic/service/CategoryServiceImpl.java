@@ -28,6 +28,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<Category> listOfAllCategoriesAndSubCategory() {
+        return categoryDao.listOfAllCategoriesAndSubCategory();
+    }
+
+    @Override
     public List<Category> listOfSubCategory(int catID) {
         return categoryDao.listOfSubCategory(catID);
     }

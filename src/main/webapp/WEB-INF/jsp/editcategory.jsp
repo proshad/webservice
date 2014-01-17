@@ -22,7 +22,6 @@
             $("#divCategory").hide();
 
             $("#category").change(function () {
-                alert("Handler for .change() called.");
                 var catID = $('#category').val();
                 if (catID > 0) {
                     var formURL = "../category/getDetails/"+catID;
@@ -37,12 +36,6 @@
                             $("#categoryName").val(data.name);
                             $("#categoryDescription").val(data.description);
                             $("#categoryNote").val(data.notes);
-                            if(data.status){
-                                $('#status').prop('checked', 1);
-                            } else{
-                                $('#status').prop('checked', 0);
-                            }
-
                         },
                         error: function (xhr, error) {
                             console.log(error);
@@ -77,6 +70,7 @@
             var formObj = $("#frmCategory");
             var formURL = formObj.attr("action");
             var catID = $('#category').val();
+
             if (catID > 0) {
                 if (type == 1) {  //delete
                     formURL = formURL.replace("saveOrUpdate", "delete/");
@@ -156,15 +150,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="field-container">
-                            <div class="label">
-                                <label></label>
-                            </div>
-                            <div class="field">
-                                <input type="checkbox" name="status" id="status">Active<br>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
+
 
                         <div class="field-container">
                             <div class="label">

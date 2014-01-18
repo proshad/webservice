@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <title>Edit Category</title>
+    <title>Edit Service</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/default.css'/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/grid.css'/>"/>
@@ -19,33 +19,63 @@
     <script type="text/javascript" src="<c:url value='/resources/js/jquery-latest.js'/>"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#divCategory").hide();
+            $("#divService").hide();
 
             $("#category").change(function () {
                 var catID = $('#category').val();
                 if (catID > 0) {
-                    var formURL = "../category/getDetails/" + catID;
+                    var serviceUrl = "../category/getAllSubCategoriesAndServices?categoryID=" + catID;
+                    $.ajax({
+                        url: serviceUrl,
+                        dataType: 'json',
+                        async: false,
+                        success: function (data) {
+                            var arrService = data.result.services;
+                            if(arrService!=undefined){
+                            for (var i = 0; i < arrService.length; i++) {
+                                var service = arrService[i];
+                                var option = $('<option/>');
+                                option.attr({ 'value': service.serviceID }).text(service.name);
+                                $('#service').append(option);
+                            }
+                            }
+                        },
+                        error: function (xhr, error) {
+                            console.log(error);
+                        }
+                    });
+
+                } else {
+                    $("#divService").hide();
+                }
+            });
+
+            $("#service").change(function () {
+                var serviceID = $('#service').val();
+                if (serviceID > 0) {
+                    var formURL = "../service/getDetailOfAService?serviceID=" + serviceID;
                     $.ajax({
                         url: formURL,
                         dataType: 'json',
                         async: false,
                         success: function (data) {
-                            $("#divCategory").show();
-                            $("#categoryID").val(data.catID);
-                            $("#parentCatID").val(data.parentID);
-                            $("#categoryName").val(data.name);
-                            $("#categoryDescription").val(data.description);
-                            $("#categoryNote").val(data.notes);
+                            data = data.result;
+                            $("#divService").show();
+                            $("#categoryID").val(data.parentID);
+                            $("#productID").val(data.serviceID);
+                            $("#productName").val(data.name);
+                            $("#productDescription").val(data.description);
+                            $("#productNote").val(data.notes);
+                            $("#noOfTimeSlot").val(data.noOfSlot);
                         },
                         error: function (xhr, error) {
                             console.log(error);
                         }
                     });
                 } else {
-                    $("#divCategory").hide();
+                    $("#divService").hide();
                 }
             });
-
 
             $('input#btnEdit').click(function (event) {
                 event.preventDefault();
@@ -67,14 +97,15 @@
         });
 
         function submitForm(type) {
-            var formObj = $("#frmCategory");
+            var formObj = $("#frmService");
             var formURL = formObj.attr("action");
             var catID = $('#category').val();
+            var serviceID = $('#service').val();
 
-            if (catID > 0) {
+            if (catID > 0 && serviceID > 0) {
                 if (type == 1) {  //delete
                     formURL = formURL.replace("saveOrUpdate", "delete/");
-                    formURL += $('#category').val();
+                    formURL += serviceID;
                 }
                 $.ajax({
                     type: "POST",
@@ -96,7 +127,7 @@
         }
     </script>
 </head>
-<body class="form-page" data-type="category">
+<body class="form-page" data-type="service">
 <div id="body">
     <div class="container">
         <h3>Edit Category</h3>
@@ -109,10 +140,18 @@
                 <option value="-1" selected="selected">Select</option>
             </select>
         </div>
+        <div class="row">
+            <p class="service">
+                <span class="label">Select Service to Edit</span>
+            </p>
+            <select class="serviceDropDown form-control" name="service" id="service">
+                <option value="-1" selected="selected">Select</option>
+            </select>
+        </div>
         <div class="form-container">
-            <form id="frmCategory" action="../category/saveOrUpdate" method="POST">
+            <form id="frmService" action="../service/saveOrUpdate" method="POST">
 
-                <div class="field-group collection-field-group" id="divCategory">
+                <div class="field-group collection-field-group" id="divService">
                     <div class="collection-field-group-container">
                         <div class="field-container">
                             <div class="label">
@@ -125,42 +164,50 @@
                         </div>
                         <div class="field-container">
                             <div class="label">
-                                <label for="parentCatID">Parent Category ID:</label>
+                                <label for="productID">Service ID:</label>
                             </div>
                             <div class="field">
-                                <input type="text" name="parentCatID" id="parentCatID" readonly="true"/>
+                                <input type="text" name="productID" id="productID" readonly="true"/>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="field-container">
                             <div class="label">
-                                <label for="categoryName">Category Name:</label>
+                                <label for="productName">Service Name:</label>
                             </div>
                             <div class="field">
-                                <input type="text" name="categoryName" id="categoryName" class="form-control"/>
+                                <input type="text" name="productName" id="productName" class="form-control"/>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="field-container">
                             <div class="label">
-                                <label for="categoryDescription">Category Description:</label>
+                                <label for="productDescription">Service Description:</label>
                             </div>
                             <div class="field">
-                                <textarea name="categoryDescription" id="categoryDescription" class="form-control"
+                                <textarea name="productDescription" id="productDescription" class="form-control"
                                           rows="5"></textarea>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="field-container">
                             <div class="label">
-                                <label for="categoryNote">Category Note:</label>
+                                <label for="productNote">Service Note:</label>
                             </div>
                             <div class="field">
-                                <input type="text" name="categoryNote" id="categoryNote" class="form-control"/>
+                                <input type="text" name="productNote" id="productNote" class="form-control"/>
                             </div>
                             <div class="clearfix"></div>
                         </div>
-
+                        <div class="field-container">
+                            <div class="label">
+                                <label for="noOfTimeSlot">No of Time Slot:</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" name="noOfTimeSlot" id="noOfTimeSlot" maxlength="4" size="4"/>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
 
                         <div class="field-container">
                             <div class="label">

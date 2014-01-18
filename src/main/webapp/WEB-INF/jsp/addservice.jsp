@@ -18,7 +18,7 @@
 
     <script type="text/javascript" src="<c:url value='/resources/js/jquery-latest.js'/>"></script>
     <script type="text/javascript">
-        function init() {
+        $(document).ready(function () {
             var categories = '${categories}';
             var arrCategories = jQuery.parseJSON(categories);
             for (var i = 0; i < arrCategories.length; i++) {
@@ -27,16 +27,44 @@
                 option.attr({ 'value': category.catID }).text(category.name);
                 $('#categoryID').append(option);
             }
-        }
+
+            $('input#btnSubmit').click(function (event) {
+                event.preventDefault();
+                var name = $("#productName").val().trim();
+                var catId = $("#categoryID").val();
+                if (name!="" && catId>0) {
+                    var formObj = $("#frmAddService");
+                    var formURL = formObj.attr("action");
+                    $.ajax({
+                        type: "POST",
+                        url: formURL,
+                        dataType: 'json',
+                        data: formObj.serialize()
+                    }).done(function (data) {
+                                alert(data.message);
+                                $("#productName").val("");
+                                $("#productDescription").val("");
+                                $("#productNote").val("");
+                                $("#noOfTimeSlot").val("");
+                                location.reload();
+                            })
+                            .fail(function(data) {
+                                alert("SORRY, Internal server error!");
+                            });
+                } else{
+                    alert("Please enter valid data");
+                }
+            });
+        });
     </script>
 </head>
-<body class="form-page" data-type="service" onload="init()">
+<body class="form-page" data-type="service">
 <div id="body">
     <div class="container">
         <h3>Add Service</h3>
 
         <div class="form-container">
-            <form id="frmAddCategory" action="../service/saveOrUpdate" method="POST">
+            <form id="frmAddService" action="../service/saveOrUpdate" method="POST">
 
                 <div class="field-group collection-field-group advanced-field-group">
                     <div class="collection-field-group-container">
@@ -73,7 +101,7 @@
                                 <label for="noOfTimeSlot">No of Time Slot:</label>
                             </div>
                             <div class="field">
-                                <input type="text" name="noOfTimeSlot" id="noOfTimeSlot"  maxlength="4" size="4"/>
+                                <input type="text" name="noOfTimeSlot" id="noOfTimeSlot" maxlength="4" size="4"/>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -81,7 +109,7 @@
                             <div class="label">
                                 <label for="categoryID">Category:</label>
                             </div>
-                            <div class="field period-field">
+                            <div class="field">
                                 <select class="catDropDown form-control" name="categoryID" id="categoryID">
                                     <option value="-1" selected="selected">Select</option>
                                 </select>
@@ -93,11 +121,11 @@
                             <div class="label">
                                 <label></label>
                             </div>
-                            <div class="field">
-                                <input type="submit" value="Submit"/>
+                            <div class="buttons">
+                                <input type="button" name="submit" id="btnSubmit" class="button submit" value="Submit"/>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
-
                     </div>
 
                 </div>

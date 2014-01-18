@@ -85,6 +85,7 @@ public class ProductController {
             int slotDuration = organization.getTimeSlotDuration();
             int noOfSlot = product.getNoOfTimeSlot();
             productMap.put("duration", slotDuration * noOfSlot);
+            productMap.put("noOfSlot", noOfSlot);
         }
 
         // get default price of this product

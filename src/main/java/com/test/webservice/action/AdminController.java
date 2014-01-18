@@ -89,4 +89,20 @@ public class AdminController {
 
         return "editcategory";
     }
+
+    @RequestMapping(value = "/editService")
+    public String editService(ModelMap map) throws Exception {
+        JSONArray jArrayCategories = new JSONArray();
+        List<Category> categories = categoryService.listOfAllCategoriesAndSubCategory();
+        for (Category category : categories) {
+            JSONObject obj = new JSONObject();
+            obj.put("catID", category.getCategoryID());
+            obj.put("name", category.getCategoryName().trim());
+            jArrayCategories.add(obj);
+        }
+
+        map.put("categories",jArrayCategories);
+
+        return "editservice";
+    }
 }

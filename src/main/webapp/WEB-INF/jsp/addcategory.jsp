@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <title>Category</title>
+    <title>Add Category</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/default.css'/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/grid.css'/>"/>
@@ -18,7 +18,7 @@
 
     <script type="text/javascript" src="<c:url value='/resources/js/jquery-latest.js'/>"></script>
     <script type="text/javascript">
-        function init() {
+        $(document).ready(function () {
             var categories = '${categories}';
             var arrCategories = jQuery.parseJSON(categories);
             for (var i = 0; i < arrCategories.length; i++) {
@@ -27,10 +27,31 @@
                 option.attr({ 'value': category.catID }).text(category.name);
                 $('#parentCatID').append(option);
             }
-        }
+
+            $('input#btnSubmit').click(function (event) {
+                event.preventDefault();
+                var formObj = $("#frmAddCategory");
+                var formURL = formObj.attr("action");
+                $.ajax({
+                    type: "POST",
+                    url: formURL,
+                    dataType: 'json',
+                    data: formObj.serialize()
+                }).done(function (data) {
+                            alert(data.message);
+                            $("#categoryName").val("");
+                            $("#categoryDescription").val("");
+                            $("#categoryNote").val("");
+                            location.reload();
+                        })
+                        .fail(function(data) {
+                            alert("SORRY, Internal server error!");
+                        });
+            });
+        });
     </script>
 </head>
-<body class="form-page" data-type="category" onload="init()">
+<body class="form-page" data-type="category">
 <div id="body">
     <div class="container">
         <h3>Add Category</h3>
@@ -72,7 +93,7 @@
                             <div class="label">
                                 <label for="parentCatID">Parent Category:</label>
                             </div>
-                            <div class="field period-field">
+                            <div class="field">
                                 <select class="catDropDown form-control" name="parentCatID" id="parentCatID">
                                     <option value="-1" selected="selected">Select</option>
                                 </select>
@@ -83,12 +104,11 @@
                             <div class="label">
                                 <label></label>
                             </div>
-                            <div class="field">
-                                <input type="submit" value="Submit"/>
+                            <div class="buttons">
+                                <input type="button" name="submit" id="btnSubmit" class="button submit" value="Submit"/>
                             </div>
                             <div class="clearfix"></div>
                         </div>
-
                     </div>
 
                 </div>

@@ -22,6 +22,7 @@
             $("#divService").hide();
 
             $("#category").change(function () {
+                $('#service option[value!="-1"]').remove();
                 var catID = $('#category').val();
                 if (catID > 0) {
                     var serviceUrl = "../category/getAllSubCategoriesAndServices?categoryID=" + catID;

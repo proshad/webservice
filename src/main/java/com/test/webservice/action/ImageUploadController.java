@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.test.webservice.util.UploadItem;
@@ -13,6 +14,8 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -114,7 +117,9 @@ public class ImageUploadController {
                 inputStream.close();
 
                 ModelAndView mv = new ModelAndView("uploadForm");
-                addMessages(file.getName() + " has been uploaded successfully");
+                HttpServletRequest request =  ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                String baseUrl = String.format("%s://%s:%d/webservice/resources/image/",request.getScheme(),  request.getServerName(), request.getServerPort());
+                addMessages(baseUrl+""+file.getOriginalFilename() + " has been uploaded successfully");
                 mv.addObject("messages", this.messages);
 
                 return mv;

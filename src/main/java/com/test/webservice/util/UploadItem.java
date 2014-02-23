@@ -13,6 +13,16 @@ public class UploadItem {
     private String filename;
     private CommonsMultipartFile fileData;
 
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
+
+    private String productID;
+
     public String getFilename()
     {
         return filename;

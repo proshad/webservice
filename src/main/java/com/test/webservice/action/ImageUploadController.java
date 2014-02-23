@@ -1,16 +1,22 @@
 package com.test.webservice.action;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.generic.entity.Category;
+import com.generic.entity.Product;
+import com.generic.entity.ProductImage;
+import com.generic.service.CategoryService;
+import com.generic.service.ProductImageService;
+import com.generic.service.ProductService;
 import com.test.webservice.util.UploadItem;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +32,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/image")
 public class ImageUploadController {
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private ProductImageService productImageService;
+
+    @Autowired
+    private ProductService productService;
+
     private Integer IMAGE_MAX_SIZE = 200000;  //200KB
 
     // list of allowed file extensions
@@ -56,12 +70,24 @@ public class ImageUploadController {
     public ModelAndView showUploadForm()
     {
         clearMessages();
-        ModelAndView mv = new ModelAndView("uploadForm");
+        ModelAndView mv = new ModelAndView("serviceimage");
 
         // prepare an item that will store the uploaded file
         mv.addObject("uploadItem", new UploadItem());
-
+        initialize(mv);
         return mv;
+    }
+
+    private void initialize(ModelAndView mv){
+        JSONArray jArrayCategories = new JSONArray();
+        List<Category> categories = categoryService.listOfAllCategoriesAndSubCategory();
+        for (Category category : categories) {
+            JSONObject obj = new JSONObject();
+            obj.put("catID", category.getCategoryID());
+            obj.put("name", category.getCategoryName().trim());
+            jArrayCategories.add(obj);
+        }
+        mv.addObject("categories", jArrayCategories);
     }
 
     // this method will be called when the upload form is submitted
@@ -86,25 +112,23 @@ public class ImageUploadController {
 
                 if (!this.allowedImageExtensions.contains(extension))
                 {
-                    ModelAndView mv = new ModelAndView("uploadForm");
+                    ModelAndView mv = new ModelAndView("serviceimage");
                     addMessages("Incorrect file extension - only jpg, gif, png are allowed");
                     mv.addObject("messages", this.messages);
+                    initialize(mv);
                     return mv;
                 }
 
                 if (file.getSize() > IMAGE_MAX_SIZE)
                 {
-                    ModelAndView mv = new ModelAndView("uploadForm");
+                    ModelAndView mv = new ModelAndView("serviceimage");
                     addMessages("File size too large");
                     mv.addObject("messages", this.messages);
+                    initialize(mv);
                     return mv;
                 }
-
-
                 File dir = new File(imageDir);
-
                 File imageFile = new File(imageDir, file.getOriginalFilename());
-
                 OutputStream outputStream = new FileOutputStream(fileName);
 
                 int readBytes = 0;
@@ -116,27 +140,49 @@ public class ImageUploadController {
                 outputStream.close();
                 inputStream.close();
 
-                ModelAndView mv = new ModelAndView("uploadForm");
+                ModelAndView mv = new ModelAndView("serviceimage");
                 HttpServletRequest request =  ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 String baseUrl = String.format("%s://%s:%d/webservice/resources/image/",request.getScheme(),  request.getServerName(), request.getServerPort());
-                addMessages(baseUrl+""+file.getOriginalFilename() + " has been uploaded successfully");
+                String url = baseUrl+""+file.getOriginalFilename();
+                addMessages( file.getOriginalFilename() + " has been uploaded successfully");
+
+                ProductImage productImage = new ProductImage();
+                try {
+                    int productID = Integer.parseInt(uploadItem.getProductID());
+                    if(productID > 0){
+                        Product product = productService.detailsOfService(productID);
+                        productImage.setProduct(product);
+                        productImage.setImageUrl(url);
+                    }
+                    productImageService.saveOrUpdate(productImage);
+
+                } catch (Exception ex) {
+                    mv.addObject("messages", ex.getMessage());
+                    initialize(mv);
+                    return mv;
+                }
+
                 mv.addObject("messages", this.messages);
+
+
 
                 return mv;
             }
             else
             {
-                ModelAndView mv = new ModelAndView("uploadForm");
+                ModelAndView mv = new ModelAndView("serviceimage");
                 addMessages("The file is empty");
                 mv.addObject("messages",this.messages);
+                initialize(mv);
                 return mv;
             }
         }
         catch (Exception e)
         {
             addMessages("Unknown error while uploading the file: " + e.getMessage());
-            ModelAndView mv = new ModelAndView("uploadForm");
+            ModelAndView mv = new ModelAndView("serviceimage");
             mv.addObject("messages", this.messages);
+            initialize(mv);
             return mv;
         }
     }
@@ -146,7 +192,6 @@ public class ImageUploadController {
     private void clearMessages()
     {
         this.messages = new ArrayList<String>();
-
     }
 
     public void addMessages(String msg)

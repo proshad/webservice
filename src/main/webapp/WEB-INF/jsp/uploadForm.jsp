@@ -3,10 +3,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
-<c:if test="${fn:length(errorMsgs) > 0}">
+<c:if test="${fn:length(messages) > 0}">
     <ul>
-        <c:forEach items="${errorMsgs}" var="error">
-            <li><c:out value="${error}" /></li>
+        <c:forEach items="${messages}" var="msg">
+            <li><c:out value="${msg}" /></li>
         </c:forEach>
     </ul>
 </c:if>

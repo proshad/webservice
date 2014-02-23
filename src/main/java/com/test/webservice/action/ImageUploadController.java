@@ -1,14 +1,11 @@
 package com.test.webservice.action;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
 import com.test.webservice.util.UploadItem;
@@ -26,13 +23,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/image")
 public class ImageUploadController {
-    private Integer IMAGE_MAX_SIZE = 500000;
+    private Integer IMAGE_MAX_SIZE = 200000;  //200KB
 
     // list of allowed file extensions
     private Set<String> allowedImageExtensions;
 
-    // list of error messages
-    private List<String> errorMsgs = new ArrayList<String>();
+    // list of messages
+    private List<String> messages = new ArrayList<String>();
 
 
 
@@ -41,8 +38,11 @@ public class ImageUploadController {
         // define allowed file extensions
         this.allowedImageExtensions = new HashSet<String>();
         this.allowedImageExtensions.add("png");
+        this.allowedImageExtensions.add("PNG");
         this.allowedImageExtensions.add("jpg");
+        this.allowedImageExtensions.add("JPG");
         this.allowedImageExtensions.add("gif");
+        this.allowedImageExtensions.add("GIF");
 
         // init error messages
         clearMessages();
@@ -81,21 +81,21 @@ public class ImageUploadController {
                 String fileName = imageDir + "/" + file.getOriginalFilename();
                 String extension = FilenameUtils.getExtension(file.getOriginalFilename());
 
-//                if (!this.allowedImageExtensions.contains(extension))
-//                {
-//                    ModelAndView mv = new ModelAndView("uploadForm");
-//                    addError("Incorrect file extension - only JPG, GIF, PNG i TIFF are allowed");
-//                    mv.addObject("errorMsgs", this.errorMsgs);
-//                    return mv;
-//                }
-//
-//                if (file.getSize() > IMAGE_MAX_SIZE)
-//                {
-//                    ModelAndView mv = new ModelAndView("uploadForm");
-//                    addError("File size too large");
-//                    mv.addObject("errorMsgs", this.errorMsgs);
-//                    return mv;
-//                }
+                if (!this.allowedImageExtensions.contains(extension))
+                {
+                    ModelAndView mv = new ModelAndView("uploadForm");
+                    addMessages("Incorrect file extension - only jpg, gif, png are allowed");
+                    mv.addObject("messages", this.messages);
+                    return mv;
+                }
+
+                if (file.getSize() > IMAGE_MAX_SIZE)
+                {
+                    ModelAndView mv = new ModelAndView("uploadForm");
+                    addMessages("File size too large");
+                    mv.addObject("messages", this.messages);
+                    return mv;
+                }
 
 
                 File dir = new File(imageDir);
@@ -113,21 +113,25 @@ public class ImageUploadController {
                 outputStream.close();
                 inputStream.close();
 
-                return new ModelAndView("redirect:/uploadSuccess");
+                ModelAndView mv = new ModelAndView("uploadForm");
+                addMessages(file.getName() + " has been uploaded successfully");
+                mv.addObject("messages", this.messages);
+
+                return mv;
             }
             else
             {
                 ModelAndView mv = new ModelAndView("uploadForm");
-                addError("The file is empty");
-                mv.addObject("errorMsgs",this.errorMsgs);
+                addMessages("The file is empty");
+                mv.addObject("messages",this.messages);
                 return mv;
             }
         }
         catch (Exception e)
         {
-            addError("Unknown error while uploading the file: " + e.getMessage());
+            addMessages("Unknown error while uploading the file: " + e.getMessage());
             ModelAndView mv = new ModelAndView("uploadForm");
-            mv.addObject("errorMsgs", this.errorMsgs);
+            mv.addObject("messages", this.messages);
             return mv;
         }
     }
@@ -136,12 +140,12 @@ public class ImageUploadController {
 
     private void clearMessages()
     {
-        this.errorMsgs = new ArrayList<String>();
+        this.messages = new ArrayList<String>();
 
     }
 
-    public void addError(String msg)
+    public void addMessages(String msg)
     {
-        this.errorMsgs.add(msg);
+        this.messages.add(msg);
     }
 }

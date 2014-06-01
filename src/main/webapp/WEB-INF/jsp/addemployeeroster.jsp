@@ -52,7 +52,7 @@
                 }
                 $('#rosterID').val(rosterID);
                 $('#employeeID').val(employeeID);
-                var formObj = $("#frmEmployeeService");
+                var formObj = $("#frmEmployeeRoster");
                 var formURL = formObj.attr("action");
                 $.ajax({
                     type: "POST",

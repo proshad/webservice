@@ -66,7 +66,7 @@ public class ImageUploadController {
     }
 
     // this method is prepares the upload form for display
-    @RequestMapping(value = "/showUploadForm", method = RequestMethod.GET)
+    @RequestMapping(value = "/addServiceImage", method = RequestMethod.GET)
     public ModelAndView showUploadForm()
     {
         clearMessages();

@@ -205,4 +205,14 @@ public class AdminController {
         return "addemployeeroster";
     }
 
+    @RequestMapping(value = "/addUser")
+    public String addUser(ModelMap map) throws Exception {
+        return "adduser";
+    }
+
+    @RequestMapping(value = "/addOrganization")
+    public String addOrganization(ModelMap map) throws Exception {
+        return "addorganization";
+    }
+
 }

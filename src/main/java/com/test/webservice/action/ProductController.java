@@ -79,13 +79,13 @@ public class ProductController {
         productMap.put("name", product.getProductName());
         productMap.put("description", product.getProductDescription());
         productMap.put("notes", product.getProductNote());
+        productMap.put("noOfSlot", product.getNoOfTimeSlot());
 
         List<Organization> organizations = organizationService.listOfOrganization();
         for (Organization organization : organizations) {
             int slotDuration = organization.getTimeSlotDuration();
             int noOfSlot = product.getNoOfTimeSlot();
             productMap.put("duration", slotDuration * noOfSlot);
-            productMap.put("noOfSlot", noOfSlot);
         }
 
         // get default price of this product
